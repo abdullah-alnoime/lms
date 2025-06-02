@@ -321,7 +321,7 @@ const Register = () => {
                     )}
 
                     {/* Hidden form for Netlify bot detection */}
-                    <form name="registration" netlify="true" netlify-honeypot="bot-field" hidden>
+                    <form name="registration" data-netlify="true" netlify-honeypot="bot-field" hidden>
                         <input type="text" name="name" />
                         <input type="tel" name="phoneNumber" />
                         <textarea name="message"></textarea>
