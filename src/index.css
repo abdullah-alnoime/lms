@@ -16,6 +16,9 @@ a.active:not(:last-child) {
 .lesson h1 {
     @apply w-fit text-2xl font-bold mt-6 mb-3 relative dark:text-neutral-100;
 }
+.markdown-content h2 {
+  @apply text-xl;
+}
 .markdown-content h2::after,
 .lesson h1::after {
     content: "";
@@ -27,7 +30,10 @@ a.active:not(:last-child) {
     @apply bg-yellow-200/65;
 }
 .markdown-content h3 {
-    @apply text-xl font-bold mt-4 mb-2 dark:text-neutral-100;
+  @apply text-lg font-bold mt-4 mb-2 dark:text-neutral-100;
+}
+.markdown-content h4 {
+    @apply font-bold dark:text-neutral-100;
 }
 .markdown-content p {
     @apply my-4 leading-relaxed dark:text-neutral-100;
@@ -79,11 +85,15 @@ a.active:not(:last-child) {
     @apply text-emerald-700 dark:text-emerald-100 pr-0;
 }
 .markdown-content div[dir="ltr"] {
-    @apply border-none p-0 my-4 bg-neutral-900 rounded-lg shadow-md overflow-hidden;
+    @apply border-none p-0 my-4 rounded-lg shadow-md overflow-hidden;
     line-height: 1.2;
 }
 .markdown-content div[dir="ltr"] h3 {
-    @apply bg-neutral-700 text-white py-2 px-4 m-0 font-medium text-sm border-b border-neutral-700;
+    @apply bg-slate-100 dark:bg-neutral-700 text-black dark:text-white py-2 px-4 m-0 font-medium text-sm border-none;
+}
+.markdown-content div[dir="ltr"] pre,
+.markdown-content div[dir="ltr"] pre code {
+    @apply bg-neutral-700 dark:bg-neutral-900 rounded-t-none border-none;
 }
 .markdown-content a {
     @apply text-blue-600 hover:underline;
@@ -98,7 +108,7 @@ a.active:not(:last-child) {
     @apply my-2 border-t-2 border-gray-100;
 }
 .markdown-content img {
-    @apply block max-w-full my-4 mx-auto;
+    @apply block max-w-full my-4 mx-auto dark:invert;
 }
 .markdown-content pre {
     direction: ltr;

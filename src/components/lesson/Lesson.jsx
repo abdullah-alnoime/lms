@@ -55,7 +55,7 @@ const Lesson = () => {
         <div className="w-full max-w-4xl mx-auto self-start lesson">
             <Link
                 to="/lessons"
-                className="flex items-center gap-2 mb-4 text-blue-600 dark:text-blue-200 hover:text-blue-800 dark:hover:text-blue-300 font-medium"
+                className="w-fit flex items-center gap-2 mb-4 text-blue-600 dark:text-blue-200 hover:text-blue-800 dark:hover:text-blue-300 font-medium"
             >
                 <ArrowRight className="h-5 w-5" />
                 <span>الرجوع للدروس</span>
@@ -89,21 +89,18 @@ const Lesson = () => {
                     </Link>
                 )}
             </div>
-            {lessonStatus.completed && (
+            {lessonStatus.completed && parsedLessonId < lessons.length && (
                 <div className="mt-4 p-3 bg-green-50 dark:bg-neutral-700 rounded-md">
                     <p className="text-green-700 dark:text-green-200 font-medium">
                         لقد أكملت هذا الدرس بنجاح! يمكنك الانتقال إلى الدرس
                         التالي.
                     </p>
-                    {parsedLessonId < lessons.length && (
                         <Link
                             to={`/lessons/${parsedLessonId + 1}`}
-                            className="mt-2.5 inline-flex items-center text-green-600 dark:text-green-300 hover:text-green-800 dark:hover:text-green-400"
+                            className="w-fit mt-3 p-2 font-bold rounded-md flex gap-2 items-center ms-auto items-center text-white bg-green-700 dark:text-neutral-950 dark:bg-green-300 hover:bg-green-800 dark:hover:bg-green-200"
                         >
-                            الدرس التالي
-                            <ChevronLeft size={16} className="mr-1" />
+                            <ChevronLeft size={20} />
                         </Link>
-                    )}
                 </div>
             )}
 

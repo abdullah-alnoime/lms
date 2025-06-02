@@ -8,7 +8,7 @@ const LessonProgress = ({ progress, hasExercises }) => {
     } = progress || {};
 
     return (
-        <div className="dark:bg-neutral-700 rounded-lg shadow-sm p-4 mb-4">
+        <div className="bg-slate-50 dark:bg-neutral-700 rounded-lg shadow-sm p-4 mb-4">
             <div className="flex items-center justify-between mb-2">
                 <h3 className="font-bold text-gray-600 dark:text-neutral-100 flex items-center gap-2">
                     <BarChart3

@@ -19,7 +19,7 @@ export const lessons = [
 ---
 تتكون الآلة القابلة للبرمجة من وحدات مختلفة تعمل معاً لتنفيذ البرامج.
 
-![structure of programmable machine](https://ik.imagekit.io/qkzwdg8a3/img-spm.jpg)
+![structure of programmable machine](https://ik.imagekit.io/qkzwdg8a3/img-spm.png)
 
 ### المكونات الرئيسية:
 1. **الذاكرة الرئيسية**: تتكون من نوعين أساسيين:
@@ -212,11 +212,11 @@ while (x ≤ 100)
 
 | الخطوة | لغة نصية | لغة رسومية (تدفقية) |
 |--------|----------|----------------------|
-| البداية والنهاية | البداية / النهاية |  ![oval shape](https://ik.imagekit.io/qkzwdg8a3/tr:w-0.4/img-oval.jpg) |
-|  والكتابة | اقرأ / اكتب | ![parallelogram shape](https://ik.imagekit.io/qkzwdg8a3/tr:w-0.4/img-parallelogram.jpg)   |
-| إسناد / عملية حسابية  | ← / + - % / true | ![rectangular shape](https://ik.imagekit.io/qkzwdg8a3/tr:w-0.4/img-rectangular.jpg) |
-| الشرط | إذا | ![condition shape](https://ik.imagekit.io/qkzwdg8a3/img-condition.jpg)  |
-| التكرار | طالما | ![loop shape](https://ik.imagekit.io/qkzwdg8a3/img-loop.jpg)  |
+| البداية والنهاية | البداية / النهاية |  ![oval shape](https://ik.imagekit.io/qkzwdg8a3/tr:w-0.4/img-oval.png) |
+|  والكتابة | اقرأ / اكتب | ![parallelogram shape](https://ik.imagekit.io/qkzwdg8a3/tr:w-0.4/img-parallelogram.png)   |
+| إسناد / عملية حسابية  | ← / + - % / true | ![rectangular shape](https://ik.imagekit.io/qkzwdg8a3/tr:w-0.4/img-rectangular.png) |
+| الشرط | إذا | ![condition shape](https://ik.imagekit.io/qkzwdg8a3/img-condition.png)  |
+| التكرار | طالما | ![loop shape](https://ik.imagekit.io/qkzwdg8a3/img-loop.png)  |
 
 > [warning]
 > ### ملاحظات مهمة:
@@ -227,7 +227,8 @@ while (x ≤ 100)
 ### أمثلة على المخططات التدفقية:
 
 1. **التحقق من إشارة عدد**:
-![number sign algorithm](https://ik.imagekit.io/qkzwdg8a3/img-nsf.jpg)
+
+![number sign algorithm](https://ik.imagekit.io/qkzwdg8a3/img-nsf.png)
 
 **شرح المخطط التدفقي**
 - البداية
@@ -238,7 +239,8 @@ while (x ≤ 100)
 - النهاية
 
 2. **جمع عددين**:
-![sumation algorithm](https://ik.imagekit.io/qkzwdg8a3/tr:w-0.7/img-sf.jpg)
+
+![sumation algorithm](https://ik.imagekit.io/qkzwdg8a3/tr:w-0.7/img-sf.png)
 
 **شرح المخطط التدفقي**
 - البداية
@@ -247,7 +249,8 @@ while (x ≤ 100)
 - النهاية
 
 3. **طباعة الأعداد من 1 إلى عدد يدخله المستخدم**:
-![print numbers algorithm](https://ik.imagekit.io/qkzwdg8a3/img-cf.jpg)
+
+![print numbers algorithm](https://ik.imagekit.io/qkzwdg8a3/img-cf.png)
 
 **شرح المخطط التدفقي**
 - البداية
@@ -645,7 +648,7 @@ while (condition) {
 \`\`\`
 
 **المخطط التدفقي:**
-![while loop](https://ik.imagekit.io/qkzwdg8a3/img-while.jpg)
+![while loop](https://ik.imagekit.io/qkzwdg8a3/img-while.png)
 
 **مثال: طباعة الأعداد من 1 إلى n**
 \`\`\`cpp
@@ -680,7 +683,7 @@ do {
 \`\`\`
 
 **المخطط التدفقي:**
-![do while loop](https://ik.imagekit.io/qkzwdg8a3/img-do-while.jpg)
+![do while loop](https://ik.imagekit.io/qkzwdg8a3/img-do-while.png)
 
 **مثال: طباعة الأعداد من 1 إلى n**
 \`\`\`cpp
@@ -715,7 +718,7 @@ for (initialize; condition; modify) { // تهيئة ; شرط ; تعديل
 \`\`\`
 
 **المخطط التدفقي**
-![for loop](https://ik.imagekit.io/qkzwdg8a3/img-for.jpg)
+![for loop](https://ik.imagekit.io/qkzwdg8a3/img-for.png)
 
 **مثال: طباعة الأعداد من 1 إلى n**
 \`\`\`cpp
@@ -826,7 +829,7 @@ int main() {
 ---
 المصفوفة هي مجموعة من العناصر المتجاورة في الذاكرة، جميعها من نفس النوع، ويمكن الوصول إليها باستخدام مؤشر (index) كما في الشكل الآتي:
 
-![array structure](https://ik.imagekit.io/qkzwdg8a3/img-sar.jpg)
+![array structure](https://ik.imagekit.io/qkzwdg8a3/img-sar.png)
 
 ### تعريف المصفوفة الأحادية
 \`\`\`cpp
@@ -890,7 +893,7 @@ for (int i = 0; i < 5; i++) {
 ---
 المصفوفة الثنائية هي مصفوفة من المصفوفات، أو يمكن القول كجدول من الصفوف والأعمدة كما هو مبين في الشكل التالي:
 
-![array structure](https://ik.imagekit.io/qkzwdg8a3/img-da.jpg)
+![array structure](https://ik.imagekit.io/qkzwdg8a3/img-da.png)
 
 ### تعريف المصفوفة الثنائية
 \`\`\`cpp
@@ -1475,7 +1478,7 @@ float sum(float x, float y) {
 - تُخزن في جزء الذاكرة المسمى Heap (حجم أكبر).
 
 **شكل توضيحي**
-![array structure](https://ik.imagekit.io/qkzwdg8a3/img-lgv.jpg)
+![array structure](https://ik.imagekit.io/qkzwdg8a3/img-lgv.png)
 
 \`\`\`cpp
 // متغير عام
@@ -1804,7 +1807,7 @@ GCD for 5 and 8 is 4
 السجلات هي طريقة لتجميع مجموعة من البيانات مختلفة النوع تحت مسمى واحد. تختلف عن المصفوفة التي تحوي عناصر من نوع واحد فقط.
 
 **شكل توضيحي**
-![array structure](https://ik.imagekit.io/qkzwdg8a3/img-ssr.jpg)
+![array structure](https://ik.imagekit.io/qkzwdg8a3/img-ssr.png)
 
 - الصندوق الكبير يمثل السجل الكامل (struct) ويشار إليه بـ "big box".
 - الصناديق الصغيرة داخله تمثل الحقول المختلفة في السجل وتشار إليها بـ "small box".
