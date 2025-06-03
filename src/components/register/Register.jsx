@@ -22,7 +22,7 @@ const Register = () => {
         });
     }, []);
 
-    const whatsappGroupLink = "https://chat.whatsapp.com/CRF0BjA1t9q5HtCf9w747q";
+    const whatsappGroupLink = import.meta.env.VITE_WHATSAPP_GROUP_URL;
     const validationSchema = Yup.object({
         name: Yup.string()
             .min(2, "الاسم يجب أن يحتوي على حرفين على الأقل")

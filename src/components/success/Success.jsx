@@ -4,16 +4,13 @@ import { CheckCircle2 } from "lucide-react";
 
 const Success = ({ setShowSuccess }) => {
     const navigate = useNavigate();
-
     useEffect(() => {
         const timerId = setTimeout(() => {
-            setShowSuccess(false); // explicitly hide the success message
+            setShowSuccess(false);
             navigate("/");
         }, 2000);
-
         return () => clearTimeout(timerId);
-    }, [setShowSuccess, navigate]); // include dependencies
-
+    }, [setShowSuccess, navigate]);
     return (
         <div className="bg-gray-50 dark:bg-neutral-700 rounded-xl p-6">
             <div className="flex justify-center mb-6">
