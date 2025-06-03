@@ -97,7 +97,7 @@ const Register = () => {
     if (showSuccess && submittedData) {
         return (
             <div className="w-full max-w-4xl mx-auto flex flex-col justify-center">
-                <Success />
+                <Success setShowSuccess={setShowSuccess} />
             </div>
         );
     }
