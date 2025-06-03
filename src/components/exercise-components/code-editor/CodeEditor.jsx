@@ -1,12 +1,11 @@
-// import AceEditor from "react-ace";
+import AceEditor from "react-ace";
 import { Play, RotateCcw, Loader } from "lucide-react";
-/*
 import "ace-builds/src-noconflict/ace";
 import "ace-builds/src-noconflict/mode-c_cpp";
 import "ace-builds/src-noconflict/ext-language_tools";
 import "ace-builds/src-noconflict/ext-searchbox";
 import "ace-builds/src-noconflict/theme-monokai";
-*/
+
 const CodeEditor = ({
     code,
     onChange,
@@ -48,7 +47,6 @@ const CodeEditor = ({
                 </button>
             </div>
             <div className="code-editor rounded-lg overflow-hidden border border-gray-200">
-            {/*
                 <AceEditor
                     theme="monokai"
                     mode={getEditorMode()}
@@ -70,10 +68,9 @@ const CodeEditor = ({
                     height="400px"
                     style={{
                         borderRadius: "0.5rem",
-                        paddingBlock: "0.5rem"
+                        padding: "0.5rem"
                     }}
                 />
-                */}
             </div>
             <div className="mt-4 flex gap-3">
                 <button
