@@ -69,7 +69,7 @@ const Summary = ({
             {passed && lessonStatus.completed && (
                 <div className="mb-4 p-3 bg-green-50 dark:bg-neutral-700 border border-green-200 dark:border-none rounded-md">
                     <p className="text-green-700 dark:text-green-300 text-center">
-                        لقد أكملت هذا الدرس بنجاح!<br>
+                        لقد أكملت هذا الدرس بنجاح!<br />
                         {parsedLessonId < lessons.length &&
                             " يمكنك الانتقال إلى الدرس التالي."}
                     </p>
@@ -115,7 +115,7 @@ const Summary = ({
                     )}
             </div>
         </div>
-    );
+    )
 };
 
 export default Summary;
