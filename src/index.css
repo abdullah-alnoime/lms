@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 #root {
-    @apply grid min-h-[100dvh] container mx-auto dark:bg-neutral-800;
+    @apply grid min-h-[100dvh] container mx-auto;
     grid-template-rows: auto 1fr auto;
 }
 a.active:not(:last-child) {

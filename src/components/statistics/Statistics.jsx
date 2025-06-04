@@ -58,7 +58,7 @@ const Statistics = () => {
         );
     }
     return (
-        <div className="w-full max-w-4xl mx-auto bg-white rounded-lg overflow-hidden">
+        <div className="w-full max-w-4xl mx-auto bg-white self-start rounded-lg overflow-hidden">
             <div className="p-6 bg-blue-600 dark:bg-blue-200 text-white dark:text-black">
                 <h2 className="text-2xl font-bold mb-2">إحصائيات الطالب</h2>
                 <p className="text-blue-100 dark:text-neutral-800">

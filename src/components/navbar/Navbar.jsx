@@ -36,25 +36,25 @@ const Navbar = () => {
                 <div className="hidden md:flex items-center gap-4">
                     <NavLink
                         to="/"
-                        className="p-2 hover:bg-neutral-50 rounded-md"
+                        className="p-2 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-neutral-800 dark:hover:text-blue-200 dark:text-neutral-100 rounded-md"
                     >
                         الصفحة الرئيسية
                     </NavLink>
                     <NavLink
                         to="/lessons"
-                        className="p-2 hover:bg-neutral-50 rounded-md"
+                        className="p-2 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-neutral-800 dark:hover:text-blue-200 dark:text-neutral-100 rounded-md"
                     >
                         الدروس
                     </NavLink>
                     <NavLink
                         to="/statistics"
-                        className="p-2 hover:bg-neutral-50 rounded-md"
+                        className="p-2 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-neutral-800 dark:hover:text-blue-200 dark:text-neutral-100 rounded-md"
                     >
                         الإحصائيات
                     </NavLink>
                     <NavLink
                         to="/register"
-                        className="p-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                        className="py-2 px-4 bg-blue-600 dark:bg-blue-200 text-white dark:text-black rounded-md hover:bg-blue-700 dark:hover:bg-blue-300"
                     >
                         تسجيل
                     </NavLink>
