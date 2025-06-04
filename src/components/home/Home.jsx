@@ -51,7 +51,7 @@ const Home = () => {
             >
                 <Link
                     to="/lessons"
-                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-200 text-white dark:text-black font-medium rounded-md transition-colors duration-200"
+                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-200 dark:hover:bg-blue-300 text-white dark:text-black font-medium rounded-md transition-colors duration-200"
                 >
                     تصفح الدروس
                 </Link>

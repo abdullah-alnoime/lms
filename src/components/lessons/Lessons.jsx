@@ -2,24 +2,53 @@ import { Link } from "react-router-dom";
 import { Book, Lock, Check, Clock } from "lucide-react";
 import { lessons } from "../../data/lessons";
 import { useProgress } from "../../hooks/useProgress";
+import { motion } from "framer-motion";
 
+const cardVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: (i) => ({
+        opacity: 1,
+        y: 0,
+        transition: {
+            delay: i * 0.1,
+            duration: 0.5,
+            ease: "easeOut"
+        }
+    })
+};
+const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+};
 const Lessons = () => {
     const { isLessonUnlocked, getLessonStatus } = useProgress();
+
     return (
         <div className="w-full max-w-4xl mx-auto self-start">
-            <h1 className="text-2xl font-bold mb-4 pb-4 border-b dark:text-neutral-100">
+            <motion.h1 
+              className="text-2xl font-bold mb-4 pb-4 border-b dark:text-neutral-100"
+              variants={fadeIn}
+                initial="hidden"
+                animate="visible"
+              >
                 الدروس
-            </h1>
+            </motion.h1>
             <div className="grid md:grid-cols-2 gap-4">
-                {lessons.map(lesson => {
+                {lessons.map((lesson, index) => {
                     const unlocked = isLessonUnlocked(lesson.id);
                     const status = getLessonStatus(lesson.id);
+
                     return (
-                        <div
+                        <motion.div
                             key={lesson.id}
                             className={`dark:bg-neutral-700 rounded-lg shadow overflow-hidden ${
                                 !unlocked ? "opacity-70" : ""
                             }`}
+                            variants={cardVariants}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true, amount: 0.2 }}
+                            custom={index}
                         >
                             <div className="h-full p-4 flex flex-col">
                                 <div className="flex justify-between">
@@ -106,7 +135,7 @@ const Lessons = () => {
                                     )}
                                 </div>
                             </div>
-                        </div>
+                        </motion.div>
                     );
                 })}
             </div>

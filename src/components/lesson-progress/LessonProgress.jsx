@@ -1,4 +1,5 @@
-import { BarChart3, ChevronRight } from "lucide-react";
+import { BarChart3 } from "lucide-react";
+import { motion } from "framer-motion";
 
 const LessonProgress = ({ progress, hasExercises }) => {
     const {
@@ -8,7 +9,12 @@ const LessonProgress = ({ progress, hasExercises }) => {
     } = progress || {};
 
     return (
-        <div className="bg-slate-50 dark:bg-neutral-700 rounded-lg shadow-sm p-4 mb-4">
+        <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="bg-slate-50 dark:bg-neutral-700 rounded-lg shadow-sm p-4 mb-4"
+        >
             <div className="flex items-center justify-between mb-2">
                 <h3 className="font-bold text-gray-600 dark:text-neutral-100 flex items-center gap-2">
                     <BarChart3
@@ -21,60 +27,46 @@ const LessonProgress = ({ progress, hasExercises }) => {
                     {overallProgress}%
                 </span>
             </div>
+
             <div className="space-y-3">
-                <div>
-                    <div className="flex justify-between text-sm mb-2">
-                        <span className="text-gray-600 dark:text-neutral-100">
-                            الاختبار
-                        </span>
-                        <span className="font-medium dark:text-neutral-100">
-                            {quizProgress}%
-                        </span>
-                    </div>
-                    <div className="w-full bg-gray-200 dark:bg-neutral-800 rounded-full h-2">
-                        <div
-                            className="bg-blue-600 dark:bg-blue-200 h-2 rounded-full"
-                            style={{ width: `${quizProgress}%` }}
-                        />
-                    </div>
-                </div>
+                <ProgressBar
+                    label="الاختبار"
+                    value={quizProgress}
+                    color="bg-blue-600 dark:bg-blue-200"
+                />
                 {hasExercises && (
-                    <div>
-                        <div className="flex justify-between text-sm mb-2">
-                            <span className="text-gray-600 dark:text-neutral-100">
-                                التمارين
-                            </span>
-                            <span className="font-medium dark:text-neutral-100">
-                                {exercisesProgress}%
-                            </span>
-                        </div>
-                        <div className="w-full bg-gray-200 dark:bg-neutral-800 rounded-full h-2">
-                            <div
-                                className="bg-green-500 dark:bg-green-200 h-2 rounded-full"
-                                style={{ width: `${exercisesProgress}%` }}
-                            />
-                        </div>
-                    </div>
+                    <ProgressBar
+                        label="التمارين"
+                        value={exercisesProgress}
+                        color="bg-green-500 dark:bg-green-200"
+                    />
                 )}
-                <div>
-                    <div className="flex justify-between text-sm mb-2">
-                        <span className="text-gray-600 dark:text-neutral-100">
-                            التقدم الكلي
-                        </span>
-                        <span className="font-medium dark:text-neutral-100">
-                            {overallProgress}%
-                        </span>
-                    </div>
-                    <div className="w-full bg-gray-200 dark:bg-neutral-800 rounded-full h-2">
-                        <div
-                            className="bg-purple-500 dark:bg-purple-200 h-2 rounded-full"
-                            style={{ width: `${overallProgress}%` }}
-                        />
-                    </div>
-                </div>
+                <ProgressBar
+                    label="التقدم الكلي"
+                    value={overallProgress}
+                    color="bg-purple-500 dark:bg-purple-200"
+                />
             </div>
-        </div>
+        </motion.div>
     );
 };
+
+// Reusable progress bar with animation
+const ProgressBar = ({ label, value, color }) => (
+    <div>
+        <div className="flex justify-between text-sm mb-2">
+            <span className="text-gray-600 dark:text-neutral-100">{label}</span>
+            <span className="font-medium dark:text-neutral-100">{value}%</span>
+        </div>
+        <div className="w-full bg-gray-200 dark:bg-neutral-800 rounded-full h-2 overflow-hidden">
+            <motion.div
+                initial={{ width: 0 }}
+                animate={{ width: `${value}%` }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className={`h-2 rounded-full transition-colors duration-300 ${color}`}
+            />
+        </div>
+    </div>
+);
 
 export default LessonProgress;

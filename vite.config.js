@@ -14,9 +14,15 @@ export default defineConfig({
     exclude: ['ace-builds']
   },
   build: {
+    chunkSizeWarningLimit: 1000,
     rollupOptions: {
-      // External packages that should not be bundled
-      external: [],
-    },
-  },
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            return 'vendor';
+          }
+        }
+      }
+    }
+  }
 });

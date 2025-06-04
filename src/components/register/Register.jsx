@@ -10,17 +10,31 @@ import {
     Loader2,
     AlertCircle,
 } from "lucide-react";
+import { motion } from "framer-motion";
+
+const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+};
+
+const scaleFade = {
+    hidden: { opacity: 0, scale: 0.95 },
+    visible: { opacity: 1, scale: 1 },
+};
 
 const Register = () => {
     const [showSuccess, setShowSuccess] = useState(false);
     const [submittedData, setSubmittedData] = useState(null);
+
     useEffect(() => {
         window.scrollTo({
             top: 0,
             behavior: "smooth"
         });
     }, []);
+
     const whatsappGroupLink = import.meta.env.VITE_WHATSAPP_GROUP_URL;
+
     const validationSchema = Yup.object({
         name: Yup.string()
             .min(2, "الاسم يجب أن يحتوي على حرفين على الأقل")
@@ -32,12 +46,12 @@ const Register = () => {
             .min(10, "رقم الهاتف قصير جداً")
             .max(17, "رقم الهاتف طويل جداً")
             .required("رقم الواتساب مطلوب"),
-        
         message: Yup.string()
             .min(10, "الرسالة يجب أن تحتوي على 10 أحرف على الأقل")
             .max(500, "الرسالة طويلة جداً (الحد الأقصى 500 حرف)")
             .required("الرسالة مطلوبة")
     });
+
     const formik = useFormik({
         initialValues: {
             name: "",
@@ -79,23 +93,32 @@ const Register = () => {
             }
         }
     });
-    const hasError = (fieldName) => {
-        return formik.touched[fieldName] && formik.errors[fieldName];
-    };
-    const getErrorMessage = (fieldName) => {
-        return hasError(fieldName) ? formik.errors[fieldName] : "";
-    };
+
+    const hasError = (fieldName) => formik.touched[fieldName] && formik.errors[fieldName];
+    const getErrorMessage = (fieldName) => hasError(fieldName) ? formik.errors[fieldName] : "";
+
     if (showSuccess && submittedData) {
         return (
-            <div className="w-full max-w-4xl mx-auto flex flex-col justify-center">
+            <motion.div
+                className="w-full max-w-4xl mx-auto flex flex-col justify-center"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6 }}
+            >
                 <Success setShowSuccess={setShowSuccess} />
-            </div>
+            </motion.div>
         );
     }
 
     return (
         <div className="w-full max-w-4xl mx-auto flex flex-col justify-center gap-6">
-            <div className="bg-neutral-50 dark:bg-neutral-700 rounded-md p-6">
+            <motion.div
+                className="bg-neutral-50 dark:bg-neutral-700 rounded-md p-6"
+                initial="hidden"
+                animate="visible"
+                variants={fadeIn}
+                transition={{ duration: 0.5 }}
+            >
                 <div className="flex justify-center">
                     <UserPlus className="h-12 w-12 text-blue-600 dark:text-blue-500" />
                 </div>
@@ -111,169 +134,181 @@ const Register = () => {
                     <ExternalLink className="h-5 w-5 ml-2 dark:text-blue-500" />
                     انضم إلى المجموعة مباشرة
                 </a>
-            </div>
-            <div>
-                <div className="sm:px-10">
-                    {formik.status?.type === "error" && (
-                        <div className="rounded-md bg-red-50 dark:bg-neutral-700 p-4 mb-4">
-                            <div className="flex items-center">
-                                <AlertCircle className="h-5 w-5 text-red-500 dark:text-red-400 ml-2" />
-                                <p className="text-red-800 dark:text-red-300">{formik.status.message}</p>
-                            </div>
-                        </div>
-                    )}
-                    <form 
-                        className="space-y-6" 
-                        onSubmit={formik.handleSubmit}
-                        name="registration"
-                        method="POST"
-                        data-netlify="true"
-                        data-netlify-honeypot="bot-field"
+            </motion.div>
+
+            <motion.div
+                className="sm:px-10"
+                initial="hidden"
+                animate="visible"
+                variants={scaleFade}
+                transition={{ duration: 0.5, delay: 0.2 }}
+            >
+                {formik.status?.type === "error" && (
+                    <motion.div
+                        className="rounded-md bg-red-50 dark:bg-neutral-700 p-4 mb-4"
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3 }}
                     >
-                        <input type="hidden" name="form-name" value="registration" />
-                        <div style={{ display: "none" }}>
-                            <label>
-                                Don't fill this out if you're human: 
-                                <input name="bot-field" />
-                            </label>
+                        <div className="flex items-center">
+                            <AlertCircle className="h-5 w-5 text-red-500 dark:text-red-400 ml-2" />
+                            <p className="text-red-800 dark:text-red-300">{formik.status.message}</p>
                         </div>
-                        <div>
-                            <label
-                                htmlFor="name"
-                                className="block text-sm font-medium text-gray-700 dark:text-neutral-100"
-                            >
-                                الاسم الكامل <span className="text-red-500 dark:text-red-300">*</span>
-                            </label>
-                            <div className="mt-2">
-                                <input
-                                    id="name"
-                                    name="name"
-                                    type="text"
-                                    value={formik.values.name}
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                    className={`appearance-none dark:bg-neutral-700 dark:text-neutral-300 dark:caret-neutral-200 block w-full px-3 py-3 border rounded-md placeholder-gray-400 dark:placeholder-neutral-300 focus:outline-none sm:text-sm ${
-                                        hasError("name")
-                                            ? "border-red-500 dark:border-red-400 focus:border-red-500 dark:focus:border-red-400"
-                                            : "border-gray-300 dark:border-neutral-600 focus:border-blue-500 dark:focus:border-blue-200"
-                                    }`}
-                                    placeholder="ادخل اسمك الكامل"
-                                />
-                                {hasError("name") && (
-                                    <div className="flex items-center mt-2">
-                                        <AlertCircle className="h-4 w-4 text-red-500 dark:text-red-300 ml-1" />
-                                        <p className="text-sm text-red-600 dark:text-red-300">
-                                            {getErrorMessage("name")}
-                                        </p>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                        <div>
-                            <label
-                                htmlFor="phoneNumber"
-                                className="block text-sm font-medium text-gray-700 dark:text-neutral-100"
-                            >
-                                رقم الواتساب <span className="text-red-500 dark:text-red-300">*</span>
-                            </label>
-                            <div className="mt-2 rounded-md shadow-sm">
-                                <input
-                                    id="phoneNumber"
-                                    name="phoneNumber"
-                                    type="tel"
-                                    value={formik.values.phoneNumber}
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                    className={`block dark:text-neutral-300 dark:bg-neutral-700 w-full p-3 border rounded-md placeholder-gray-400 dark:placeholder-neutral-300 focus:outline-none sm:text-sm ${
-                                        hasError("phoneNumber")
-                                            ? "border-red-500 dark:border-red-400 focus:border-red-500 dark:focus:border-red-400"
-                                            : "border-gray-300 dark:border-neutral-600 focus:border-blue-500 dark:focus:border-blue-200"
-                                    }`}
-                                    placeholder="+963912345678"
-                                />
-                                {hasError("phoneNumber") && (
-                                    <div className="flex items-center mt-2">
-                                        <AlertCircle className="h-4 w-4 text-red-500 dark:text-red-300 ml-1" />
-                                        <p className="text-sm text-red-600 dark:text-red-300">
-                                            {getErrorMessage("phoneNumber")}
-                                        </p>
-                                    </div>
-                                )}
-                            </div>
-                            <p className="mt-2 text-sm text-gray-500 dark:text-neutral-400">
-                                يجب تضمين رمز الدولة (مثال: +963)
-                            </p>
-                        </div>
-                        <div>
-                            <label
-                                htmlFor="message"
-                                className="block text-sm font-medium text-gray-700 dark:text-neutral-100"
-                            >
-                                رسالة <span className="text-red-500 dark:text-red-300">*</span>
-                            </label>
-                            <div className="mt-2">
-                                <textarea
-                                    id="message"
-                                    name="message"
-                                    rows="6"
-                                    value={formik.values.message}
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                    className={`p-3 resize-none focus:outline-none block dark:text-neutral-300 dark:bg-neutral-700 w-full sm:text-sm dark:placeholder-neutral-300 border rounded-md ${
-                                        hasError("message")
-                                            ? "border-red-500 dark:border-red-400 focus:border-red-500 dark:focus:border-red-400"
-                                            : "border-gray-300 dark:border-neutral-600 focus:border-blue-500 dark:focus:border-blue-200"
-                                    }`}
-                                    placeholder="أخبرني بما يجول في خاطرك.."
-                                />
-                                {hasError("message") && (
-                                    <div className="flex items-center mt-2">
-                                        <AlertCircle className="h-4 w-4 text-red-500 dark:text-red-300 ml-1" />
-                                        <p className="text-sm text-red-600 dark:text-red-300">
-                                            {getErrorMessage("message")}
-                                        </p>
-                                    </div>
-                                )}
-                                <div className="flex justify-between items-center mt-2">
-                                    <p className={`text-sm self-end ${
-                                        formik.values.message.length > 500 
-                                            ? "text-red-500 dark:text-red-300" 
-                                            : formik.values.message.length >= 10 
-                                                ? "text-green-500 dark:text-green-300" 
-                                                : "text-gray-400 dark:text-neutral-300"
-                                    }`}>
-                                        {formik.values.message.length}/500
+                    </motion.div>
+                )}
+
+                <form
+                    className="space-y-6"
+                    onSubmit={formik.handleSubmit}
+                    name="registration"
+                    method="POST"
+                    data-netlify="true"
+                    data-netlify-honeypot="bot-field"
+                >
+                    <input type="hidden" name="form-name" value="registration" />
+                    <div style={{ display: "none" }}>
+                        <label>
+                            Don't fill this out if you're human:
+                            <input name="bot-field" />
+                        </label>
+                    </div>
+
+                    {/* Name Input */}
+                    <div>
+                        <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-neutral-100">
+                            الاسم الكامل <span className="text-red-500 dark:text-red-300">*</span>
+                        </label>
+                        <div className="mt-2">
+                            <input
+                                id="name"
+                                name="name"
+                                type="text"
+                                value={formik.values.name}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                className={`appearance-none dark:bg-neutral-700 dark:text-neutral-300 dark:caret-neutral-200 block w-full px-3 py-3 border rounded-md placeholder-gray-400 dark:placeholder-neutral-300 focus:outline-none sm:text-sm ${
+                                    hasError("name")
+                                        ? "border-red-500 dark:border-red-400 focus:border-red-500 dark:focus:border-red-400"
+                                        : "border-gray-300 dark:border-neutral-600 focus:border-blue-500 dark:focus:border-blue-200"
+                                }`}
+                                placeholder="ادخل اسمك الكامل"
+                            />
+                            {hasError("name") && (
+                                <div className="flex items-center mt-2">
+                                    <AlertCircle className="h-4 w-4 text-red-500 dark:text-red-300 ml-1" />
+                                    <p className="text-sm text-red-600 dark:text-red-300">
+                                        {getErrorMessage("name")}
                                     </p>
                                 </div>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* Phone Input */}
+                    <div>
+                        <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700 dark:text-neutral-100">
+                            رقم الواتساب <span className="text-red-500 dark:text-red-300">*</span>
+                        </label>
+                        <div className="mt-2 rounded-md shadow-sm">
+                            <input
+                                id="phoneNumber"
+                                name="phoneNumber"
+                                type="tel"
+                                value={formik.values.phoneNumber}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                className={`block dark:text-neutral-300 dark:bg-neutral-700 w-full p-3 border rounded-md placeholder-gray-400 dark:placeholder-neutral-300 focus:outline-none sm:text-sm ${
+                                    hasError("phoneNumber")
+                                        ? "border-red-500 dark:border-red-400 focus:border-red-500 dark:focus:border-red-400"
+                                        : "border-gray-300 dark:border-neutral-600 focus:border-blue-500 dark:focus:border-blue-200"
+                                }`}
+                                placeholder="+963912345678"
+                            />
+                            {hasError("phoneNumber") && (
+                                <div className="flex items-center mt-2">
+                                    <AlertCircle className="h-4 w-4 text-red-500 dark:text-red-300 ml-1" />
+                                    <p className="text-sm text-red-600 dark:text-red-300">
+                                        {getErrorMessage("phoneNumber")}
+                                    </p>
+                                </div>
+                            )}
+                        </div>
+                        <p className="mt-2 text-sm text-gray-500 dark:text-neutral-400">
+                            يجب تضمين رمز الدولة (مثال: +963)
+                        </p>
+                    </div>
+
+                    {/* Message Input */}
+                    <div>
+                        <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-neutral-100">
+                            رسالة <span className="text-red-500 dark:text-red-300">*</span>
+                        </label>
+                        <div className="mt-2">
+                            <textarea
+                                id="message"
+                                name="message"
+                                rows="6"
+                                value={formik.values.message}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                className={`p-3 resize-none focus:outline-none block dark:text-neutral-300 dark:bg-neutral-700 w-full sm:text-sm dark:placeholder-neutral-300 border rounded-md ${
+                                    hasError("message")
+                                        ? "border-red-500 dark:border-red-400 focus:border-red-500 dark:focus:border-red-400"
+                                        : "border-gray-300 dark:border-neutral-600 focus:border-blue-500 dark:focus:border-blue-200"
+                                }`}
+                                placeholder="أخبرني بما يجول في خاطرك.."
+                            />
+                            {hasError("message") && (
+                                <div className="flex items-center mt-2">
+                                    <AlertCircle className="h-4 w-4 text-red-500 dark:text-red-300 ml-1" />
+                                    <p className="text-sm text-red-600 dark:text-red-300">
+                                        {getErrorMessage("message")}
+                                    </p>
+                                </div>
+                            )}
+                            <div className="flex justify-between items-center mt-2">
+                                <p className={`text-sm self-end ${
+                                    formik.values.message.length > 500 
+                                        ? "text-red-500 dark:text-red-300" 
+                                        : formik.values.message.length >= 10 
+                                            ? "text-green-500 dark:text-green-300" 
+                                            : "text-gray-400 dark:text-neutral-300"
+                                }`}>
+                                    {formik.values.message.length}/500
+                                </p>
                             </div>
                         </div>
-                        <div className="space-y-4">
-                          {Object.keys(formik.errors).length > 0 && formik.submitCount > 0 && (
-                                    <p className="text-sm text-red-600 dark:text-red-300">
-                                        يرجى تصحيح الأخطاء أعلاه قبل الإرسال
-                                    </p>
+                    </div>
+
+                    {/* Submit */}
+                    <div className="space-y-4">
+                        {Object.keys(formik.errors).length > 0 && formik.submitCount > 0 && (
+                            <p className="text-sm text-red-600 dark:text-red-300">
+                                يرجى تصحيح الأخطاء أعلاه قبل الإرسال
+                            </p>
+                        )}
+                        <motion.button
+                            type="submit"
+                            disabled={formik.isSubmitting || !formik.isValid}
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="w-full flex justify-center items-center py-3 px-2 border border-none rounded-md shadow font-medium text-white dark:text-black bg-blue-600 dark:bg-blue-200 hover:bg-blue-700 dark:hover:bg-blue-300 focus:outline-none transition-all duration-200 disabled:pointer-events-none disabled:bg-gray-200 disabled:text-gray-500 dark:disabled:bg-neutral-900 dark:disabled:text-neutral-500"
+                        >
+                            {formik.isSubmitting ? (
+                                <>
+                                    <Loader2 className="animate-spin ml-3 h-5 w-5 text-white dark:text-black" />
+                                    يتم المعالجة...
+                                </>
+                            ) : (
+                                <>
+                                    <Send className="h-4 w-4 ml-2" />
+                                    تسجيل
+                                </>
                             )}
-                            <button
-                                type="submit"
-                                disabled={formik.isSubmitting || !formik.isValid}
-                                className="w-full flex justify-center items-center py-3 px-2 border border-none rounded-md shadow font-medium text-white dark:text-black bg-blue-600 dark:bg-blue-200 hover:bg-blue-700 dark:hover:bg-blue-300 focus:outline-none transition-all duration-200 disabled:pointer-events-none disabled:bg-gray-200 disabled:text-gray-500 dark:disabled:bg-neutral-900 dark:disabled:text-neutral-500 "
-                            >
-                                {formik.isSubmitting ? (
-                                    <>
-                                        <Loader2 className="animate-spin ml-3 h-5 w-5 text-white dark:text-black" />
-                                        يتم المعالجة...
-                                    </>
-                                ) : (
-                                    <>
-                                        <Send className="h-4 w-4 ml-2" />
-                                        تسجيل
-                                    </>
-                                )}
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+                        </motion.button>
+                    </div>
+                </form>
+            </motion.div>
         </div>
     );
 };

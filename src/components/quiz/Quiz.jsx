@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
-import { Info, ArrowRight } from "lucide-react";
+import { useParams } from "react-router-dom";
 import { questions } from "../../data/questions";
 import { Loading } from "../loading";
 import {
@@ -10,6 +9,7 @@ import {
     DetailedResults
 } from "../quiz-components";
 import { shuffleArray } from "../../utils/helpers.js";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Quiz = () => {
     const { lessonId } = useParams();
@@ -25,13 +25,11 @@ const Quiz = () => {
     const [userAnswers, setUserAnswers] = useState([]);
     const [showResults, setShowResults] = useState(false);
     const [hasQuestions, setHasQuestions] = useState(true);
+
     const TIME_PER_QUESTION = 30;
 
     useEffect(() => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
+        window.scrollTo({ top: 0, behavior: "smooth" });
     }, []);
 
     useEffect(() => {
@@ -39,8 +37,7 @@ const Quiz = () => {
     }, [lessonId]);
 
     useEffect(() => {
-        if (quizCompleted || !timeRemaining || showFeedback || !hasQuestions)
-            return;
+        if (quizCompleted || !timeRemaining || showFeedback || !hasQuestions) return;
 
         const timer = setInterval(() => {
             setTimeRemaining(prev => {
@@ -73,11 +70,8 @@ const Quiz = () => {
         shuffled.forEach((question, index) => {
             const originalOptions = question.options;
             const shuffledOptions = shuffleArray(originalOptions);
-            const originalCorrectAnswer =
-                originalOptions[question.correctAnswer];
-            const newCorrectAnswer = shuffledOptions.indexOf(
-                originalCorrectAnswer
-            );
+            const originalCorrectAnswer = originalOptions[question.correctAnswer];
+            const newCorrectAnswer = shuffledOptions.indexOf(originalCorrectAnswer);
 
             optionsMap[index] = {
                 options: shuffledOptions,
@@ -100,7 +94,6 @@ const Quiz = () => {
         setTimeout(() => {
             setShowFeedback(false);
             setSelectedAnswer(null);
-
             if (currentQuestion < shuffledQuestions.length - 1) {
                 setCurrentQuestion(currentQuestion + 1);
                 setTimeRemaining(TIME_PER_QUESTION);
@@ -111,8 +104,7 @@ const Quiz = () => {
     };
 
     const handleAnswer = answerIndex => {
-        if (!shuffledQuestions.length || !shuffledOptionsMap[currentQuestion])
-            return;
+        if (!shuffledQuestions.length || !shuffledOptionsMap[currentQuestion]) return;
 
         setSelectedAnswer(answerIndex);
 
@@ -120,8 +112,7 @@ const Quiz = () => {
         newUserAnswers[currentQuestion] = answerIndex;
         setUserAnswers(newUserAnswers);
 
-        const correct =
-            answerIndex === shuffledOptionsMap[currentQuestion].correctAnswer;
+        const correct = answerIndex === shuffledOptionsMap[currentQuestion].correctAnswer;
         if (correct) {
             setScore(score + 1);
         }
@@ -132,7 +123,6 @@ const Quiz = () => {
         setTimeout(() => {
             setShowFeedback(false);
             setSelectedAnswer(null);
-
             if (currentQuestion < shuffledQuestions.length - 1) {
                 setCurrentQuestion(currentQuestion + 1);
                 setTimeRemaining(TIME_PER_QUESTION);
@@ -162,26 +152,38 @@ const Quiz = () => {
 
     if (quizCompleted && showResults) {
         return (
-            <DetailedResults
-                score={score}
-                shuffledQuestions={shuffledQuestions}
-                shuffledOptionsMap={shuffledOptionsMap}
-                userAnswers={userAnswers}
-                resetQuiz={resetQuiz}
-                setShowResults={setShowResults}
-            />
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.4 }}
+            >
+                <DetailedResults
+                    score={score}
+                    shuffledQuestions={shuffledQuestions}
+                    shuffledOptionsMap={shuffledOptionsMap}
+                    userAnswers={userAnswers}
+                    resetQuiz={resetQuiz}
+                    setShowResults={setShowResults}
+                />
+            </motion.div>
         );
     }
 
     if (quizCompleted) {
         return (
-            <Summary
-                score={score}
-                shuffledQuestions={shuffledQuestions}
-                showDetailedResults={showDetailedResults}
-                resetQuiz={resetQuiz}
-                lessonId={lessonId}
-            />
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.4 }}
+            >
+                <Summary
+                    score={score}
+                    shuffledQuestions={shuffledQuestions}
+                    showDetailedResults={showDetailedResults}
+                    resetQuiz={resetQuiz}
+                    lessonId={lessonId}
+                />
+            </motion.div>
         );
     }
 
@@ -190,19 +192,29 @@ const Quiz = () => {
     }
 
     return (
-        <Question
-            currentQuestion={currentQuestion}
-            totalQuestions={shuffledQuestions.length}
-            timeRemaining={timeRemaining}
-            question={shuffledQuestions[currentQuestion]}
-            options={shuffledOptionsMap[currentQuestion].options}
-            selectedAnswer={selectedAnswer}
-            showFeedback={showFeedback}
-            isCorrect={isCorrect}
-            correctAnswer={shuffledOptionsMap[currentQuestion].correctAnswer}
-            handleAnswer={handleAnswer}
-            lessonId={lessonId}
-        />
+        <AnimatePresence mode="wait">
+            <motion.div
+                key={currentQuestion}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.4 }}
+            >
+                <Question
+                    currentQuestion={currentQuestion}
+                    totalQuestions={shuffledQuestions.length}
+                    timeRemaining={timeRemaining}
+                    question={shuffledQuestions[currentQuestion]}
+                    options={shuffledOptionsMap[currentQuestion].options}
+                    selectedAnswer={selectedAnswer}
+                    showFeedback={showFeedback}
+                    isCorrect={isCorrect}
+                    correctAnswer={shuffledOptionsMap[currentQuestion].correctAnswer}
+                    handleAnswer={handleAnswer}
+                    lessonId={lessonId}
+                />
+            </motion.div>
+        </AnimatePresence>
     );
 };
 
