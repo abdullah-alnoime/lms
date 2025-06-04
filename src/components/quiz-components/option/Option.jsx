@@ -18,13 +18,13 @@ const Option = ({
             buttonClass += "bg-red-100 border-red-500 text-red-800 dark:text-neutral-500";
         } else {
             buttonClass +=
-                " bg-gray-100 dark:bg-neutral-500 border-gray-300 text-gray-500 dark:text-neutral-100";
+                "bg-gray-100 dark:bg-neutral-500 border-gray-300 text-gray-500 dark:text-neutral-100";
         }
     } else if (selectedAnswer === index) {
         buttonClass += "bg-blue-100 border-blue-500 text-blue-800";
     } else {
         buttonClass +=
-            " bg-white border-gray-300 dark:bg-neutral-700 hover:bg-blue-50 dark:hover:bg-neutral-600 hover:border-blue-300";
+            "bg-white border-gray-300 dark:bg-neutral-700 hover:bg-blue-50 dark:hover:bg-neutral-600 hover:border-blue-300";
     }
 
     return (
