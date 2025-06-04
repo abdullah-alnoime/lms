@@ -26,14 +26,12 @@ const Exercise = () => {
         isLessonUnlocked,
         completeExercise,
         isExerciseCompleted,
-        getLessonStatus,
         loading
     } = useProgress();
 
     const [code, setCode] = useState("");
     const [feedbackMessage, setFeedbackMessage] = useState("");
     const [feedbackType, setFeedbackType] = useState("");
-    const [showHint, setShowHint] = useState(false);
     const [remainingHints, setRemainingHints] = useState(3);
     const [showSolution, setShowSolution] = useState(false);
     const [showAlgorithm, setShowAlgorithm] = useState(false);
@@ -42,7 +40,7 @@ const Exercise = () => {
     const [exerciseCompleted, setExerciseCompleted] = useState(false);
     const [testResults, setTestResults] = useState([]);
     const [isTestRunning, setIsTestRunning] = useState(false);
-    const { output, error, isRunning, runCode: executeCode } = useJudge0();
+    const { isRunning, runCode: executeCode } = useJudge0();
 
     const lessonExercises = exercises.filter(
         ex => ex.lessonId === parsedLessonId
@@ -107,7 +105,6 @@ const Exercise = () => {
         setCode(currentExercise.startingCode || "");
         setFeedbackMessage("");
         setFeedbackType("");
-        setShowHint(false);
         setRemainingHints(currentExercise.hints?.length || 0);
         setShowSolution(false);
         setShowAlgorithm(false);
@@ -228,7 +225,7 @@ const Exercise = () => {
             code,
             language: currentExercise.language,
             input: "",
-            onResult: (result, output, error) => {
+            onResult: (result) => {
                 if (result === "accepted") {
                     if (!exerciseCompleted) {
                         completeExercise(parsedLessonId, currentExercise.id);
@@ -247,7 +244,6 @@ const Exercise = () => {
     const getHint = () => {
         if (!hasExercises) return;
         if (remainingHints > 0) {
-            setShowHint(true);
             const hintIndex =
                 (currentExercise.hints?.length || 0) - remainingHints;
             setRemainingHints(prev => prev - 1);

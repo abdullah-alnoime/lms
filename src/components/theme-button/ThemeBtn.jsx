@@ -1,10 +1,8 @@
-import React, { useState } from "react";
 import { useTheme } from "../../hooks/useTheme";
 import { Sun, Moon } from "lucide-react";
 
 const ThemeBtn = () => {
     const { theme, toggleTheme } = useTheme();
-
     return (
         <div className="w-fit mx-auto">
             <button

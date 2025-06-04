@@ -4,9 +4,7 @@ import { lessons } from "../../data/lessons";
 import { useProgress } from "../../hooks/useProgress";
 
 const Lessons = () => {
-    const { isLessonUnlocked, getLessonStatus, resetAllProgress } =
-        useProgress();
-
+    const { isLessonUnlocked, getLessonStatus } = useProgress();
     return (
         <div className="w-full max-w-4xl mx-auto self-start">
             <h1 className="text-2xl font-bold mb-4 pb-4 border-b dark:text-neutral-100">

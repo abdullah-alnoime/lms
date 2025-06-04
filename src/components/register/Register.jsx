@@ -14,14 +14,12 @@ import {
 const Register = () => {
     const [showSuccess, setShowSuccess] = useState(false);
     const [submittedData, setSubmittedData] = useState(null);
-
     useEffect(() => {
         window.scrollTo({
             top: 0,
             behavior: "smooth"
         });
     }, []);
-
     const whatsappGroupLink = import.meta.env.VITE_WHATSAPP_GROUP_URL;
     const validationSchema = Yup.object({
         name: Yup.string()
@@ -29,7 +27,6 @@ const Register = () => {
             .max(50, "الاسم طويل جداً")
             .matches(/^[a-zA-Zأ-ي\s]+$/, "الاسم يجب أن يحتوي على أحرف فقط")
             .required("الاسم مطلوب"),
-        
         phoneNumber: Yup.string()
             .matches(/^\+[1-9]\d{1,14}$/, "رقم الهاتف غير صحيح. يجب أن يبدأ بـ + متبوعاً برمز الدولة")
             .min(10, "رقم الهاتف قصير جداً")
@@ -48,7 +45,7 @@ const Register = () => {
             message: ""
         },
         validationSchema,
-        onSubmit: async (values, { setSubmitting, setStatus, resetForm }) => {
+        onSubmit: async (values, { setSubmitting, setStatus }) => {
             try {
                 setStatus({ type: "", message: "" });
                 const formData = new URLSearchParams();
@@ -87,12 +84,6 @@ const Register = () => {
     };
     const getErrorMessage = (fieldName) => {
         return hasError(fieldName) ? formik.errors[fieldName] : "";
-    };
-    const handleReset = () => {
-        setShowSuccess(false);
-        setSubmittedData(null);
-        formik.resetForm();
-        formik.setStatus({ type: "", message: "" });
     };
     if (showSuccess && submittedData) {
         return (
