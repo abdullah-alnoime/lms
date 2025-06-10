@@ -6,12 +6,6 @@ import { lessons } from "../../data/lessons";
 import { useProgress } from "../../hooks/useProgress";
 import { LessonProgress } from "../lesson-progress";
 import { NoLessons } from "../no-lessons";
-import { motion } from "framer-motion";
-
-const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
-};
 
 const Lesson = () => {
     const { lessonId } = useParams();
@@ -66,12 +60,7 @@ const Lesson = () => {
 
     return (
         <div className="w-full max-w-4xl mx-auto self-start lesson">
-            <motion.div
-                variants={fadeIn}
-                initial="hidden"
-                animate="visible"
-                className="mb-4"
-            >
+            <div className="mb-4">
                 <Link
                     to="/lessons"
                     className="w-fit flex items-center gap-2 text-blue-600 dark:text-blue-200 hover:text-blue-800 dark:hover:text-blue-300 font-medium"
@@ -79,35 +68,23 @@ const Lesson = () => {
                     <ArrowRight className="h-5 w-5" />
                     <span>الرجوع للدروس</span>
                 </Link>
-            </motion.div>
-
+            </div>
             <LessonProgress
                 progress={progressStats}
                 hasExercises={lesson.hasExercises}
             />
-
-            <motion.h1
+            <h1
                 className="text-3xl text-blue-600 font-bold my-4"
-                variants={fadeIn}
-                initial="hidden"
-                animate="visible"
             >
                 {lesson.title}
-            </motion.h1>
+            </h1>
 
-            <motion.div
-                variants={fadeIn}
-                initial="hidden"
-                animate="visible"
-            >
+            <div>
                 <Markdown content={lesson.content} />
-            </motion.div>
+            </div>
 
-            <motion.div
+            <div
                 className="flex gap-2 items-center"
-                variants={fadeIn}
-                initial="hidden"
-                animate="visible"
             >
                 <Link
                     to="quiz"
@@ -128,14 +105,11 @@ const Lesson = () => {
                         التمارين
                     </Link>
                 )}
-            </motion.div>
+            </div>
 
             {lessonStatus.completed && parsedLessonId < lessons.length && (
-                <motion.div
+                <div
                     className="mt-4 p-3 bg-green-50 dark:bg-neutral-700 rounded-md"
-                    variants={fadeIn}
-                    initial="hidden"
-                    animate="visible"
                 >
                     <p className="text-green-700 dark:text-green-200 font-medium">
                         لقد أكملت هذا الدرس بنجاح! يمكنك الانتقال إلى الدرس التالي.
@@ -146,20 +120,17 @@ const Lesson = () => {
                     >
                         <ChevronLeft size={20} />
                     </Link>
-                </motion.div>
+                </div>
             )}
 
             {show && (
-                <motion.button
+                <button
                     type="button"
                     onClick={handleScroll}
                     className="fixed bottom-6 left-6 bg-gray-200 dark:bg-neutral-700 hover:bg-gray-300 dark:hover:bg-neutral-600 p-3 rounded-full shadow-lg transition-all duration-300"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.8 }}
                 >
                     <ArrowUp size={24} className="dark:text-white" />
-                </motion.button>
+                </button>
             )}
         </div>
     );

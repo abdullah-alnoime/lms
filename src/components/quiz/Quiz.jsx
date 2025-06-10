@@ -9,7 +9,6 @@ import {
     DetailedResults
 } from "../quiz-components";
 import { shuffleArray } from "../../utils/helpers.js";
-import { motion, AnimatePresence } from "framer-motion";
 
 const Quiz = () => {
     const { lessonId } = useParams();
@@ -152,11 +151,7 @@ const Quiz = () => {
 
     if (quizCompleted && showResults) {
         return (
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.4 }}
-            >
+            <div>
                 <DetailedResults
                     score={score}
                     shuffledQuestions={shuffledQuestions}
@@ -165,17 +160,12 @@ const Quiz = () => {
                     resetQuiz={resetQuiz}
                     setShowResults={setShowResults}
                 />
-            </motion.div>
+            </div>
         );
     }
 
     if (quizCompleted) {
         return (
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.4 }}
-            >
                 <Summary
                     score={score}
                     shuffledQuestions={shuffledQuestions}
@@ -183,7 +173,6 @@ const Quiz = () => {
                     resetQuiz={resetQuiz}
                     lessonId={lessonId}
                 />
-            </motion.div>
         );
     }
 
@@ -192,13 +181,9 @@ const Quiz = () => {
     }
 
     return (
-        <AnimatePresence mode="wait">
-            <motion.div
+            <div
                 key={currentQuestion}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.4 }}
+                className="w-full max-w-4xl mx-auto"
             >
                 <Question
                     currentQuestion={currentQuestion}
@@ -213,8 +198,7 @@ const Quiz = () => {
                     handleAnswer={handleAnswer}
                     lessonId={lessonId}
                 />
-            </motion.div>
-        </AnimatePresence>
+            </div>
     );
 };
 

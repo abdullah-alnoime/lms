@@ -1,5 +1,4 @@
 import { Markdown } from "../../markdown";
-import { motion } from "framer-motion";
 
 const Option = ({
     option,
@@ -10,10 +9,8 @@ const Option = ({
     handleAnswer
 }) => {
     let baseClasses =
-        "block w-full rounded border transition-all duration-150 my-2 px-4 text-right";
-
+        "block w-full rounded border transition-all duration-150 my-2 px-4 text-center";
     let feedbackClass = "";
-
     if (showFeedback) {
         if (isCorrect) {
             feedbackClass =
@@ -39,17 +36,13 @@ const Option = ({
     };
 
     return (
-        <motion.button
-            layout
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
+        <button
             className={`${baseClasses} ${feedbackClass}`}
             onClick={handleClick}
             disabled={showFeedback || selectedAnswer !== null}
         >
             <Markdown content={option} />
-        </motion.button>
+        </button>
     );
 };
 

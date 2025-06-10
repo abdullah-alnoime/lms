@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, CircleCheck, CircleAlert } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Markdown } from "../../markdown";
 import { Option } from "../option";
 import { FeedbackMsg } from "../feedback-msg";
@@ -18,7 +18,9 @@ const Question = ({
     lessonId
 }) => {
     return (
-        <div className="w-full max-w-4xl mx-auto">
+        <div
+            className="w-full max-w-4xl mx-auto"
+        >
             <div className="flex justify-between items-center mb-4">
                 <Link
                     to={`/lessons/${lessonId}`}
@@ -31,21 +33,18 @@ const Question = ({
                     تمرين {currentQuestion + 1} من {totalQuestions}
                 </div>
             </div>
+
             <div className="flex justify-between text-sm mb-4 dark:text-neutral-100">
                 <span>الوقت المتبقي</span>
-                <span
-                    className={`text
-                        ${timeRemaining < 10 ? "text-red-600 font-bold" : ""}
-                    `}
-                >
+                <span className={`text ${timeRemaining < 10 ? "text-red-600 font-bold" : ""}`}>
                     {timeRemaining} ثانية
                 </span>
             </div>
 
-            {/* Question text */}
-            <Markdown content={question.text} />
+            <div>
+                <Markdown content={question.text} />
+            </div>
 
-            {/* Answer options */}
             <div className="mb-2">
                 {options.map((option, index) => (
                     <Option
@@ -59,9 +58,11 @@ const Question = ({
                     />
                 ))}
             </div>
-
-            {/* Feedback message shown after answering */}
-            {showFeedback && <FeedbackMsg isCorrect={isCorrect} />}
+                {showFeedback && (
+                    <div>
+                        <FeedbackMsg isCorrect={isCorrect} />
+                    </div>
+                )}
         </div>
     );
 };

@@ -1,15 +1,8 @@
 import { CircleCheck, CircleAlert } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 
 const FeedbackMsg = ({ isCorrect }) => {
     return (
-        <AnimatePresence mode="wait">
-            <motion.div
-                key={isCorrect ? "correct" : "incorrect"}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.3 }}
+            <div
                 className={`p-4 rounded-lg ${
                     isCorrect
                         ? "bg-green-100 text-green-800 border border-green-300"
@@ -29,8 +22,7 @@ const FeedbackMsg = ({ isCorrect }) => {
                         </>
                     )}
                 </div>
-            </motion.div>
-        </AnimatePresence>
+            </div>
     );
 };
 

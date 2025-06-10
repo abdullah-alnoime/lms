@@ -1,69 +1,8 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { BookOpen, Code, ExternalLink, ChevronLeft } from "lucide-react";
-import { motion } from "framer-motion";
 
-const containerVariants = {
-    hidden: {},
-    show: {
-        transition: {
-            staggerChildren: 0.2
-        }
-    }
-};
-
-const cardVariants = {
-    hidden: { opacity: 0, y: 40 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
-};
-
-const Home = () => {
-    useEffect(() => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    }, []);
-
-    return (
-        <div className="w-full max-w-4xl mx-auto overflow-hidden py-8">
-            <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-            >
-                <h1 className="text-4xl md:text-5xl text-blue-700 dark:text-blue-200 font-bold mb-4 leading-tight">
-                    محاضرات مكثفة وتمارين عمليّة في لغات برمجية متعددة
-                </h1>
-            </motion.div>
-
-            <motion.p
-                className="text-md md:text-xl leading-relaxed text-gray-600 dark:text-neutral-100 mb-5 text-right"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.6 }}
-            >
-                مزيجٌ من المحاضرات المُحكمة والمنظمة والتدريبات العملية لتعزيز خبرة
-                المتعلمين، مع تركيز مكثف على التطبيق العملي لضمان اكتساب مهارات قابلة للتنفيذ.
-            </motion.p>
-
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
-            >
-                <Link
-                    to="/lessons"
-                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-200 dark:hover:bg-blue-300 text-white dark:text-black font-medium rounded-md transition-colors duration-200"
-                >
-                    تصفح الدروس
-                </Link>
-            </motion.div>
-
-            <motion.div
-                className="grid md:grid-cols-3 gap-4 my-6"
-                variants={containerVariants}
-                initial="hidden"
-                animate="show"
-            >
-                {[
+const icons = [
                     {
                         icon: <Code size={24} className="text-blue-600 dark:text-blue-500" />,
                         title: "لغات برمجة متنوعة",
@@ -85,11 +24,40 @@ const Home = () => {
                         bg: "bg-purple-50 dark:bg-neutral-700",
                         iconBg: "bg-purple-100"
                     }
-                ].map((item, i) => (
-                    <motion.div
+                ];
+const Home = () => {
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }, []);
+
+    return (
+        <div className="w-full max-w-4xl mx-auto overflow-hidden py-8">
+            <div>
+                <h1 className="text-4xl md:text-5xl text-blue-700 dark:text-blue-200 font-bold mb-4 leading-tight">
+                    محاضرات مكثفة وتمارين عمليّة في لغات برمجية متعددة
+                </h1>
+            </div>
+            <p
+                className="text-md md:text-xl leading-relaxed text-gray-600 dark:text-neutral-100 mb-5 text-right"
+            >
+                مزيجٌ من المحاضرات المُحكمة والمنظمة والتدريبات العملية لتعزيز خبرة
+                المتعلمين، مع تركيز مكثف على التطبيق العملي لضمان اكتساب مهارات قابلة للتنفيذ.
+            </p>
+            <div>
+                <Link
+                    to="/lessons"
+                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-200 dark:hover:bg-blue-300 text-white dark:text-black font-medium rounded-md transition-colors duration-200"
+                >
+                    تصفح الدروس
+                </Link>
+            </div>
+            <div
+                className="grid md:grid-cols-3 gap-4 my-6"
+            >
+                {icons.map((item, i) => (
+                    <div
                         key={i}
                         className={`${item.bg} rounded-xl p-6`}
-                        variants={cardVariants}
                     >
                         <div className="flex gap-4 items-center mb-4">
                             <div className={`${item.iconBg} p-2 rounded-lg`}>
@@ -100,15 +68,11 @@ const Home = () => {
                             </h3>
                         </div>
                         <p className="text-gray-600 dark:text-neutral-100">{item.text}</p>
-                    </motion.div>
+                    </div>
                 ))}
-            </motion.div>
-
-            <motion.div
+            </div>
+            <div
                 className="bg-gradient-to-r from-blue-600 to-indigo-600 dark:to-indigo-500 p-8 text-white rounded-md"
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6, duration: 0.6 }}
             >
                 <h2 className="text-2xl font-bold mb-4">ابدأ رحلة التعلم اليوم</h2>
                 <p className="mb-6 opacity-90">
@@ -121,7 +85,7 @@ const Home = () => {
                     <span>سجل الآن</span>
                     <ChevronLeft size={20} className="mr-2" />
                 </Link>
-            </motion.div>
+            </div>
         </div>
     );
 };

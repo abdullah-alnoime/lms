@@ -1,5 +1,4 @@
 import { BarChart3 } from "lucide-react";
-import { motion } from "framer-motion";
 
 const LessonProgress = ({ progress, hasExercises }) => {
     const {
@@ -9,10 +8,7 @@ const LessonProgress = ({ progress, hasExercises }) => {
     } = progress || {};
 
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+        <div
             className="bg-slate-50 dark:bg-neutral-700 rounded-lg shadow-sm p-4 mb-4"
         >
             <div className="flex items-center justify-between mb-2">
@@ -47,11 +43,10 @@ const LessonProgress = ({ progress, hasExercises }) => {
                     color="bg-purple-500 dark:bg-purple-200"
                 />
             </div>
-        </motion.div>
+        </div>
     );
 };
 
-// Reusable progress bar with animation
 const ProgressBar = ({ label, value, color }) => (
     <div>
         <div className="flex justify-between text-sm mb-2">
@@ -59,10 +54,8 @@ const ProgressBar = ({ label, value, color }) => (
             <span className="font-medium dark:text-neutral-100">{value}%</span>
         </div>
         <div className="w-full bg-gray-200 dark:bg-neutral-800 rounded-full h-2 overflow-hidden">
-            <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: `${value}%` }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
+            <div
+                style={{ width: `${value}%` }}
                 className={`h-2 rounded-full transition-colors duration-300 ${color}`}
             />
         </div>

@@ -10,17 +10,6 @@ import {
     Loader2,
     AlertCircle,
 } from "lucide-react";
-import { motion } from "framer-motion";
-
-const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-};
-
-const scaleFade = {
-    hidden: { opacity: 0, scale: 0.95 },
-    visible: { opacity: 1, scale: 1 },
-};
 
 const Register = () => {
     const [showSuccess, setShowSuccess] = useState(false);
@@ -32,9 +21,6 @@ const Register = () => {
             behavior: "smooth"
         });
     }, []);
-
-    const whatsappGroupLink = import.meta.env.VITE_WHATSAPP_GROUP_URL;
-
     const validationSchema = Yup.object({
         name: Yup.string()
             .min(2, "الاسم يجب أن يحتوي على حرفين على الأقل")
@@ -42,9 +28,7 @@ const Register = () => {
             .matches(/^[a-zA-Zأ-ي\s]+$/, "الاسم يجب أن يحتوي على أحرف فقط")
             .required("الاسم مطلوب"),
         phoneNumber: Yup.string()
-            .matches(/^\+[1-9]\d{1,14}$/, "رقم الهاتف غير صحيح. يجب أن يبدأ بـ + متبوعاً برمز الدولة")
-            .min(10, "رقم الهاتف قصير جداً")
-            .max(17, "رقم الهاتف طويل جداً")
+            .matches(/^09\d{8}$/, "رقم الهاتف غير صحيح. يجب أن يبدأ بـ 09 متبوعا بثمانية أرقام")
             .required("رقم الواتساب مطلوب"),
         message: Yup.string()
             .min(10, "الرسالة يجب أن تحتوي على 10 أحرف على الأقل")
@@ -55,7 +39,7 @@ const Register = () => {
     const formik = useFormik({
         initialValues: {
             name: "",
-            phoneNumber: "+963",
+            phoneNumber: "",
             message: ""
         },
         validationSchema,
@@ -99,62 +83,39 @@ const Register = () => {
 
     if (showSuccess && submittedData) {
         return (
-            <motion.div
+            <div
                 className="w-full max-w-4xl mx-auto flex flex-col justify-center"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.6 }}
             >
                 <Success setShowSuccess={setShowSuccess} />
-            </motion.div>
+            </div>
         );
     }
 
     return (
         <div className="w-full max-w-4xl mx-auto flex flex-col justify-center gap-6">
-            <motion.div
+            <div
                 className="bg-neutral-50 dark:bg-neutral-700 rounded-md p-6"
-                initial="hidden"
-                animate="visible"
-                variants={fadeIn}
-                transition={{ duration: 0.5 }}
             >
                 <div className="flex justify-center">
-                    <UserPlus className="h-12 w-12 text-blue-600 dark:text-blue-500" />
+                    <UserPlus className="h-12 w-12 text-blue-600 dark:text-blue-300" />
                 </div>
                 <h2 className="my-6 text-center text-3xl font-bold text-gray-900 dark:text-neutral-100">
-                    التسجيل على مجموعة الواتساب
+                  للتسجيل أو الاستفسار املئ البيانات أدناه.
                 </h2>
-                <a
-                    href={whatsappGroupLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full max-w-md mx-auto flex justify-center items-center py-3 px-2 border border-blue-600 dark:border-blue-200 dark:hover:border-blue-300 rounded-md shadow-sm font-medium text-blue-600 bg-white hover:bg-blue-50 outline-none dark:bg-blue-200 dark:text-black hover:bg-blue-700 dark:hover:bg-blue-300"
-                >
-                    <ExternalLink className="h-5 w-5 ml-2 dark:text-blue-500" />
-                    انضم إلى المجموعة مباشرة
-                </a>
-            </motion.div>
+            </div>
 
-            <motion.div
+            <div
                 className="sm:px-10"
-                initial="hidden"
-                animate="visible"
-                variants={scaleFade}
-                transition={{ duration: 0.5, delay: 0.2 }}
             >
                 {formik.status?.type === "error" && (
-                    <motion.div
+                    <div
                         className="rounded-md bg-red-50 dark:bg-neutral-700 p-4 mb-4"
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.3 }}
                     >
                         <div className="flex items-center">
                             <AlertCircle className="h-5 w-5 text-red-500 dark:text-red-400 ml-2" />
                             <p className="text-red-800 dark:text-red-300">{formik.status.message}</p>
                         </div>
-                    </motion.div>
+                    </div>
                 )}
 
                 <form
@@ -172,8 +133,6 @@ const Register = () => {
                             <input name="bot-field" />
                         </label>
                     </div>
-
-                    {/* Name Input */}
                     <div>
                         <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-neutral-100">
                             الاسم الكامل <span className="text-red-500 dark:text-red-300">*</span>
@@ -203,13 +162,11 @@ const Register = () => {
                             )}
                         </div>
                     </div>
-
-                    {/* Phone Input */}
                     <div>
                         <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700 dark:text-neutral-100">
                             رقم الواتساب <span className="text-red-500 dark:text-red-300">*</span>
                         </label>
-                        <div className="mt-2 rounded-md shadow-sm">
+                        <div className="mt-2">
                             <input
                                 id="phoneNumber"
                                 name="phoneNumber"
@@ -222,7 +179,7 @@ const Register = () => {
                                         ? "border-red-500 dark:border-red-400 focus:border-red-500 dark:focus:border-red-400"
                                         : "border-gray-300 dark:border-neutral-600 focus:border-blue-500 dark:focus:border-blue-200"
                                 }`}
-                                placeholder="+963912345678"
+                                placeholder="0912345678"
                             />
                             {hasError("phoneNumber") && (
                                 <div className="flex items-center mt-2">
@@ -233,12 +190,7 @@ const Register = () => {
                                 </div>
                             )}
                         </div>
-                        <p className="mt-2 text-sm text-gray-500 dark:text-neutral-400">
-                            يجب تضمين رمز الدولة (مثال: +963)
-                        </p>
                     </div>
-
-                    {/* Message Input */}
                     <div>
                         <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-neutral-100">
                             رسالة <span className="text-red-500 dark:text-red-300">*</span>
@@ -256,7 +208,7 @@ const Register = () => {
                                         ? "border-red-500 dark:border-red-400 focus:border-red-500 dark:focus:border-red-400"
                                         : "border-gray-300 dark:border-neutral-600 focus:border-blue-500 dark:focus:border-blue-200"
                                 }`}
-                                placeholder="أخبرني بما يجول في خاطرك.."
+                                placeholder="اكتب رسالتك هنا.."
                             />
                             {hasError("message") && (
                                 <div className="flex items-center mt-2">
@@ -279,20 +231,16 @@ const Register = () => {
                             </div>
                         </div>
                     </div>
-
-                    {/* Submit */}
                     <div className="space-y-4">
                         {Object.keys(formik.errors).length > 0 && formik.submitCount > 0 && (
                             <p className="text-sm text-red-600 dark:text-red-300">
                                 يرجى تصحيح الأخطاء أعلاه قبل الإرسال
                             </p>
                         )}
-                        <motion.button
+                        <button
                             type="submit"
                             disabled={formik.isSubmitting || !formik.isValid}
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                            className="w-full flex justify-center items-center py-3 px-2 border border-none rounded-md shadow font-medium text-white dark:text-black bg-blue-600 dark:bg-blue-200 hover:bg-blue-700 dark:hover:bg-blue-300 focus:outline-none transition-all duration-200 disabled:pointer-events-none disabled:bg-gray-200 disabled:text-gray-500 dark:disabled:bg-neutral-900 dark:disabled:text-neutral-500"
+                            className="w-full max-w-md mx-auto flex justify-center items-center py-3 px-2 border border-none rounded-md shadow font-medium text-white dark:text-black bg-blue-600 dark:bg-blue-200 hover:bg-blue-700 dark:hover:bg-blue-300 focus:outline-none transition-all duration-200 disabled:pointer-events-none disabled:bg-gray-200 disabled:text-gray-500 dark:disabled:bg-neutral-900 dark:disabled:text-neutral-500 "
                         >
                             {formik.isSubmitting ? (
                                 <>
@@ -305,10 +253,10 @@ const Register = () => {
                                     تسجيل
                                 </>
                             )}
-                        </motion.button>
+                        </button>
                     </div>
                 </form>
-            </motion.div>
+            </div>
         </div>
     );
 };

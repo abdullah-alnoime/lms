@@ -10,9 +10,10 @@ const QuestionResultItem = ({
     const timedOut = userAnswer === -1;
 
     return (
-        <div className="bg-gray-50 rounded-lg dark:bg-neutral-700 my-2 px-4 py-3">
+        <div
+            className="bg-gray-50 rounded-lg dark:bg-neutral-700 my-2 px-4 py-3"
+        >
             <Markdown content={question.text} />
-
             <div className="text-right mb-1">
                 <span className="text-sm text-gray-600 dark:text-neutral-100">
                     الإجابة الصحيحة:{" "}
