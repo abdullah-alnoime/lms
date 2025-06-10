@@ -14,10 +14,10 @@ const Option = ({
     if (showFeedback) {
         if (isCorrect) {
             feedbackClass =
-                "bg-green-100 border-green-600 text-green-800 dark:text-neutral-500";
+                "bg-green-100 border-green-600 text-green-800 dark:text-neutral-900";
         } else if (index === selectedAnswer) {
             feedbackClass =
-                "bg-red-100 border-red-500 text-red-800 dark:text-neutral-500";
+                "bg-red-100 border-red-500 text-red-800 dark:text-neutral-900";
         } else {
             feedbackClass =
                 "bg-gray-100 dark:bg-neutral-500 border-gray-300 text-gray-500 dark:text-neutral-100";
