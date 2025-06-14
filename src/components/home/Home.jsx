@@ -3,28 +3,28 @@ import { Link } from "react-router-dom";
 import { BookOpen, Code, ExternalLink, ChevronLeft } from "lucide-react";
 
 const icons = [
-                    {
-                        icon: <Code size={24} className="text-blue-600 dark:text-blue-500" />,
-                        title: "لغات برمجة متنوعة",
-                        text: "تعلم العديد من لغات البرمجة المطلوبة في سوق العمل.",
-                        bg: "bg-blue-50 dark:bg-neutral-700",
-                        iconBg: "bg-blue-100"
-                    },
-                    {
-                        icon: <BookOpen size={24} className="text-indigo-600 dark:text-indigo-500" />,
-                        title: "محاضرات مكثفة",
-                        text: "دروس مركزة تغطي المفاهيم الأساسية بطريقة عمليّة.",
-                        bg: "bg-indigo-50 dark:bg-neutral-700",
-                        iconBg: "bg-indigo-100"
-                    },
-                    {
-                        icon: <ExternalLink size={24} className="text-purple-600 dark:text-purple-500" />,
-                        title: "تدريب عملي",
-                        text: "تمارين تطبيقية لترسيخ المفاهيم وبناء مشاريع حقيقية.",
-                        bg: "bg-purple-50 dark:bg-neutral-700",
-                        iconBg: "bg-purple-100"
-                    }
-                ];
+  {
+    icon: <Code size={24} className="text-blue-600 dark:text-blue-500" />,
+    title: "لغات برمجة متنوعة",
+    text: "تعلم العديد من لغات البرمجة المطلوبة في سوق العمل.",
+    bg: "bg-blue-50 dark:bg-neutral-700",
+    iconBg: "bg-blue-100"
+  },
+  {
+    icon: <BookOpen size={24} className="text-indigo-600 dark:text-indigo-500" />,
+    title: "محاضرات مكثفة",
+    text: "دروس مركزة تغطي المفاهيم الأساسية بطريقة عمليّة.",
+    bg: "bg-indigo-50 dark:bg-neutral-700",
+    iconBg: "bg-indigo-100"
+  },
+  {
+    icon: <ExternalLink size={24} className="text-purple-600 dark:text-purple-500" />,
+    title: "تدريب عملي",
+    text: "تمارين تطبيقية لترسيخ المفاهيم وبناء مشاريع حقيقية.",
+    bg: "bg-purple-50 dark:bg-neutral-700",
+    iconBg: "bg-purple-100"
+  }
+];
 const Home = () => {
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });

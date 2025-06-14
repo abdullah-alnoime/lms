@@ -106,7 +106,7 @@ const Summary = ({
                     >
                         الرجوع للدرس
                     </Link>
-                {hasExercises && (
+                {hasExercises && passed && (
                         <Link
                             to={`/lessons/${lessonId}/exercises`}
                             className="border border-blue-500 dark:border-blue-200 text-blue-500 dark:text-blue-200 hover:bg-blue-50 dark:hover:bg-blue-300 font-bold py-2.5 px-4 dark:hover:text-neutral-900 rounded w-full text-center max-w-md mx-auto"
