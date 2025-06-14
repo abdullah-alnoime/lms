@@ -16,6 +16,7 @@ const Lesson = () => {
         isLessonUnlocked,
         getLessonStatus,
         getLessonProgressStats,
+        QUIZ_PASS_THRESHOLD,
         loading
     } = useProgress();
 
@@ -57,7 +58,6 @@ const Lesson = () => {
     if (!isUnlocked && !loading && parsedLessonId !== 1) {
         return <Navigate to="/lessons" replace />;
     }
-
     return (
         <div className="w-full max-w-4xl mx-auto self-start lesson">
             <div className="mb-4">
@@ -97,7 +97,7 @@ const Lesson = () => {
                         </span>
                     )}
                 </Link>
-                {lesson.hasExercises && lessonStatus.quizCompleted && (
+                {lesson.hasExercises && lessonStatus.quizScore > QUIZ_PASS_THRESHOLD && lessonStatus.quizCompleted && (
                     <Link
                         to="exercises"
                         className="p-2 border border-blue-200 bg-white text-blue-600 dark:text-neutral-100 dark:bg-neutral-800 hover:text-white dark:hover:text-black dark:hover:border-blue-300 hover:bg-blue-700 dark:hover:bg-blue-300 font-medium rounded-md transition-colors"
