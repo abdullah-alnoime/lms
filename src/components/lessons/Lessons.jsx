@@ -25,7 +25,7 @@ const Lessons = () => {
                     return (
                         <div
                             key={lesson.id}
-                            className={`border bg-slate-50 dark:bg-neutral-700 rounded-lg shadow-md overflow-hidden ${
+                            className={`border dark:border-none bg-slate-50 dark:bg-neutral-700 rounded-lg shadow-md overflow-hidden ${
                                 !unlocked ? "opacity-70 shadow-none" : null
                             }`}
                         >
