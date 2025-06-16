@@ -2,11 +2,10 @@ import { useState, useEffect } from "react";
 import { lessons } from "../data/lessons";
 import { exercises } from "../data/exercises";
 
-const QUIZ_PASS_THRESHOLD = 75;
+const QUIZ_PASS_THRESHOLD = 74;
 export const useProgress = () => {
     const [progress, setProgress] = useState({});
     const [loading, setLoading] = useState(true);
-
     useEffect(() => {
         const loadProgress = () => {
             const savedProgress = localStorage.getItem("userProgress");
@@ -33,26 +32,22 @@ export const useProgress = () => {
         };
         loadProgress();
     }, []);
-
     useEffect(() => {
         if (!loading) {
             localStorage.setItem("userProgress", JSON.stringify(progress));
         }
     }, [progress, loading]);
-
     const isLessonUnlocked = lessonId => {
         const id = parseInt(lessonId);
         if (id === 1) return true;
         return Boolean(progress[id]?.unlocked);
     };
-
     const isPreviousLessonCompleted = lessonId => {
         if (loading || lessonId <= 1) return true;
         const id = parseInt(lessonId);
         const prevLessonId = id - 1;
         return progress[prevLessonId]?.completed || false;
     };
-
     const getLessonStatus = lessonId => {
         if (loading) return { unlocked: false, completed: false };
         const id = parseInt(lessonId);
@@ -64,12 +59,10 @@ export const useProgress = () => {
             completed: progress[id]?.completed || false
         };
     };
-
     const saveQuizResult = (lessonId, score, totalQuestions) => {
         const id = parseInt(lessonId);
         const percentageScore = Math.round((score / totalQuestions) * 100);
         const quizPassed = percentageScore >= QUIZ_PASS_THRESHOLD;
-
         setProgress(prev => {
             const updatedProgress = { ...prev };
             updatedProgress[id] = {
@@ -151,8 +144,6 @@ export const useProgress = () => {
             ? lessonStatus.quizScore
             : 0;
         const lessonExercises = exercises.filter(ex => ex.lessonId === id);
-
-        // If there are no exercises, set progress to 0 instead of 100
         const exercisesProgress =
             lessonExercises.length === 0
                 ? 0
@@ -160,8 +151,6 @@ export const useProgress = () => {
                       ((lessonStatus.exercisesCompleted?.length || 0) * 100) /
                           lessonExercises.length
                   );
-
-        // If there are no exercises, calculate overall progress based only on quiz
         const overallProgress =
             lessonExercises.length === 0
                 ? quizProgress
@@ -188,7 +177,14 @@ export const useProgress = () => {
         setProgress(initialProgress);
         localStorage.setItem("userProgress", JSON.stringify(initialProgress));
     };
+    const isCourseDone = () => {
+    if (loading) return false;
 
+    return lessons.every(lesson => {
+        const status = progress[lesson.id];
+        return status?.completed === true;
+    });
+};
     return {
         isLessonUnlocked,
         isPreviousLessonCompleted,
@@ -198,6 +194,7 @@ export const useProgress = () => {
         isExerciseCompleted,
         getLessonProgressStats,
         resetAllProgress,
+        isCourseDone,
         loading,
         QUIZ_PASS_THRESHOLD
     };

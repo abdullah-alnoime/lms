@@ -21,7 +21,6 @@ const Exercise = () => {
     const { lessonId } = useParams();
     const parsedLessonId = parseInt(lessonId);
     const navigate = useNavigate();
-
     const {
         isLessonUnlocked,
         completeExercise,

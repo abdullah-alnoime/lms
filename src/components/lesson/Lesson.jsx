@@ -17,6 +17,7 @@ const Lesson = () => {
         getLessonStatus,
         getLessonProgressStats,
         QUIZ_PASS_THRESHOLD,
+        isCourseDone,
         loading
     } = useProgress();
 
@@ -109,9 +110,9 @@ const Lesson = () => {
 
             {lessonStatus.completed && parsedLessonId < lessons.length && (
                 <div
-                    className="mt-4 p-3 bg-green-50 dark:bg-neutral-700 rounded-md"
+                    className="mt-4 p-4 shadow-md bg-green-100 dark:bg-neutral-700 rounded-lg"
                 >
-                    <p className="text-green-700 dark:text-green-200 font-medium">
+                    <p className="text-green-800 font-bold dark:text-green-200">
                         لقد أكملت هذا الدرس بنجاح! يمكنك الانتقال إلى الدرس التالي.
                     </p>
                     <Link
@@ -122,7 +123,6 @@ const Lesson = () => {
                     </Link>
                 </div>
             )}
-
             {show && (
                 <button
                     type="button"

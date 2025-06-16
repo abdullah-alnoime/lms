@@ -76,11 +76,12 @@ const Summary = ({
 
             {passed && lessonStatus.completed && (
                 <div
-                    className="mb-4 p-3 bg-green-50 dark:bg-neutral-700 border border-green-200 dark:border-none rounded-md"
+                    className="grid gap-2 mb-4 p-4 bg-green-100 text-center dark:bg-neutral-700 border border-green-200 dark:border-none rounded-lg shadow-md"
                 >
-                    <p className="text-green-700 dark:text-green-300 text-center">
+                    <h3 className="text-lg text-green-800 font-bold dark:text-green-300">
                         لقد أكملت هذا الدرس بنجاح!
-                        <br />
+                        </h3>
+                        <p className="text-gray-600 dark:text-neutral-100">
                         {parsedLessonId < lessons.length &&
                             " يمكنك الانتقال إلى الدرس التالي."}
                     </p>

@@ -100,7 +100,7 @@ const Register = () => {
                     <UserPlus className="h-12 w-12 text-blue-600 dark:text-blue-300" />
                 </div>
                 <h2 className="my-6 text-center text-3xl font-bold text-gray-900 dark:text-neutral-100">
-                  للتسجيل أو الاستفسار املئ البيانات أدناه.
+                  إذا كان لديك أسئلة أو استفسارات املئ البيانات أدناه.
                 </h2>
             </div>
 

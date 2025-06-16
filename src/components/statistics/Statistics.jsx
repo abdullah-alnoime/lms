@@ -96,7 +96,7 @@ const Statistics = () => {
                                         <div
                                             className={`w-8 h-8 rounded-full flex items-center justify-center ml-3 ${
                                                 lesson.completed
-                                                    ? "bg-green-100 dark:bg-neutral-700 text-green-600 dark:text-green-300"
+                                                    ? "bg-green-200  text-green-800"
                                                     : lesson.unlocked
                                                     ? "bg-blue-100 dark:bg-neutral-700 text-blue-600 dark:text-blue-200"
                                                     : "bg-gray-100 dark:bg-neutral-700 text-gray-500 dark:text-neutral-400"
@@ -114,7 +114,7 @@ const Statistics = () => {
                                             {lesson.title || `Lesson ${lesson.id}`}
                                         </h4>
                                     </div>
-                                    <span className="text-sm font-medium px-3 py-1 rounded-full bg-blue-50 dark:bg-neutral-700 text-blue-700 dark:text-blue-200">
+                                    <span className="text-sm font-bold px-3 py-1 rounded-full bg-blue-100 dark:bg-neutral-700 text-blue-700 dark:text-blue-200">
                                         {lesson.overallProgress}%
                                     </span>
                                 </div>

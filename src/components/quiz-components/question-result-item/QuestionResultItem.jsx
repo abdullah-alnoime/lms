@@ -11,18 +11,17 @@ const QuestionResultItem = ({
 
     return (
         <div
-            className="bg-gray-50 rounded-lg dark:bg-neutral-700 my-2 px-4 py-3"
+            className="bg-gray-50 rounded-lg dark:bg-neutral-700/60 my-2 px-4 py-3"
         >
             <Markdown content={question.text} />
             <div className="text-right mb-1">
                 <span className="text-sm text-gray-600 dark:text-neutral-100">
                     الإجابة الصحيحة:{" "}
                 </span>
-                <span className="font-bold text-green-600 dark:text-green-300">
+                <span className="option font-bold text-green-600 dark:text-green-300">
                     <Markdown content={options[correctAnswer]} />
                 </span>
             </div>
-
             <div>
                 <span className="text-sm text-gray-600 dark:text-neutral-100">
                     إجابتك:{" "}
@@ -33,7 +32,7 @@ const QuestionResultItem = ({
                     </span>
                 ) : (
                     <span
-                        className={`font-bold ${
+                        className={`option font-bold ${
                             isUserCorrect
                                 ? "text-green-600 dark:text-green-300"
                                 : "text-red-600 dark:text-red-400"

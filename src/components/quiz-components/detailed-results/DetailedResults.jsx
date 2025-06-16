@@ -48,7 +48,7 @@ const DetailedResults = ({
                 </h3>
                 {shuffledQuestions.map((question, index) => (
                     <div
-                        key={question}
+                        key={`question-${index}.${question}`}
                     >
                         <QuestionResultItem
                             question={question}

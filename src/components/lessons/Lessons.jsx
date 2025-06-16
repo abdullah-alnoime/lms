@@ -1,15 +1,19 @@
 import { Link } from "react-router-dom";
 import { Book, Lock, Check, Clock } from "lucide-react";
+import { Congrats } from "../congrats";
 import { lessons } from "../../data/lessons";
 import { useProgress } from "../../hooks/useProgress";
 
 const Lessons = () => {
-    const { isLessonUnlocked, getLessonStatus } = useProgress();
-
+    const { isLessonUnlocked, getLessonStatus, isCourseDone, loading } = useProgress();
+    
     return (
         <div className="w-full max-w-4xl mx-auto self-start">
+          {isCourseDone() && 
+            <Congrats />
+          }
             <h1 
-              className="text-2xl font-bold mb-4 pb-4 border-b dark:text-neutral-100"
+              className="text-2xl font-bold my-4 pb-4 border-b dark:text-neutral-100"
               >
                 الدروس
             </h1>
@@ -21,8 +25,8 @@ const Lessons = () => {
                     return (
                         <div
                             key={lesson.id}
-                            className={`dark:bg-neutral-700 rounded-lg shadow overflow-hidden ${
-                                !unlocked ? "opacity-70" : ""
+                            className={`border bg-slate-50 dark:bg-neutral-700 rounded-lg shadow-md overflow-hidden ${
+                                !unlocked ? "opacity-70 shadow-none" : null
                             }`}
                         >
                             <div className="h-full p-4 flex flex-col">
@@ -31,7 +35,7 @@ const Lessons = () => {
                                         <div
                                             className={`w-10 h-10 rounded-full flex items-center justify-center ml-3 ${
                                                 status.completed
-                                                    ? "bg-green-100 text-green-600 dark:text-green-500"
+                                                    ? "bg-green-200 text-green-600 dark:text-green-800"
                                                     : unlocked
                                                     ? "bg-blue-100 text-blue-600 dark:text-blue-500"
                                                     : "bg-gray-100 text-gray-500"
@@ -46,17 +50,17 @@ const Lessons = () => {
                                             )}
                                         </div>
                                         <div>
-                                            <h3 className="text-lg font-semibold dark:text-neutral-100">
+                                            <h3 className="text-lg font-bold text-blue-600 dark:text-blue-200">
                                                 {lesson.title}
                                             </h3>
-                                            <div className="flex items-center text-sm text-gray-500 dark:text-neutral-100">
+                                            <div className="flex items-center mt-1 text-sm text-gray-500 dark:text-neutral-100">
                                                 <Clock className="w-3.5 h-3.5 ml-1" />
                                                 <span>حوالي 30 دقيقة</span>
                                             </div>
                                         </div>
                                     </div>
                                     {status.completed ? (
-                                        <div className="bg-green-100 text-green-800 dark:text-green-700 text-xs px-2 py-1 rounded-full flex items-center h-fit">
+                                        <div className="bg-green-200 text-green-800 dark:text-green-800 font-bold text-xs px-2 py-1 rounded-full flex items-center h-fit">
                                             <Check className="w-3 h-3 ml-1" />
                                             مكتمل
                                         </div>

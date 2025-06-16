@@ -9,16 +9,16 @@ const Option = ({
     handleAnswer
 }) => {
     let baseClasses =
-        "block w-full rounded border transition-all duration-150 my-2 px-4 text-center";
+        "option block w-full rounded border transition-all duration-150 my-2 px-4 text-center dark:text-neutral-200";
     let feedbackClass = "";
 
     if (showFeedback) {
         if (isCorrect) {
             feedbackClass =
-                "bg-green-100 dark:bg-green-900 border-green-600 text-green-800 dark:text-green-200";
+                "bg-green-100 dark:bg-green-700 border-green-600 text-green-800";
         } else if (index === selectedAnswer) {
             feedbackClass =
-                "bg-red-100 dark:bg-red-900 border-red-500 text-red-800 dark:text-red-200";
+                "bg-red-100 dark:bg-red-700 border-red-500 text-red-800";
         } else {
             feedbackClass =
                 "bg-gray-100 dark:bg-neutral-500 border-gray-300 text-gray-500 dark:text-neutral-100";

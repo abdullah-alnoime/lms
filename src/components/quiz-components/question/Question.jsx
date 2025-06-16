@@ -36,7 +36,7 @@ const Question = ({
 
             <div className="flex justify-between text-sm mb-4 dark:text-neutral-100">
                 <span>الوقت المتبقي</span>
-                <span className={`text ${timeRemaining < 10 ? "text-red-600 font-bold" : ""}`}>
+                <span className={`font-bold ${timeRemaining < 10 ? "text-red-600 dark:text-red-400" : "text-green-800 dark:text-green-300"}`}>
                     {timeRemaining} ثانية
                 </span>
             </div>

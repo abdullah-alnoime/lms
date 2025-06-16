@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 #root {
-    @apply grid min-h-[100dvh] container mx-auto;
+    @apply grid min-h-[100dvh] container mx-auto select-none;
     grid-template-rows: auto 1fr auto;
 }
 a.active:not(:last-child) {
@@ -37,6 +37,9 @@ a.active:not(:last-child) {
 }
 .markdown-content p {
     @apply my-4 leading-relaxed dark:text-neutral-200;
+}
+.option .markdown-content p {
+    @apply dark:text-current;
 }
 .markdown-content ul {
     @apply list-disc pr-6 my-4;
